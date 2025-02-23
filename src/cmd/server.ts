@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import helmet from "helmet";
 import cors from "cors";
 import { corsOptions } from "../config/cors";
+import { outletRouter } from "../outlets/infraestructure/http/routers/OutletRouter";
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ app.use(
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.use("/outlet", outletRouter)
 
 app.get("/", (req, res) => {
   res.send("API is running");

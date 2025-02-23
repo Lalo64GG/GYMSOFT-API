@@ -3,7 +3,7 @@ import { Entity, PrimaryColumn, Column } from "typeorm";
 @Entity("users")
 
 // TODO: Faltan datos por agregar a la entidad
-export class User{
+export class EUser{
 @PrimaryColumn({type: "bigint"})
     id?: number;
 
