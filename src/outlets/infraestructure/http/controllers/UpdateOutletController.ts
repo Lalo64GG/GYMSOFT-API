@@ -23,15 +23,17 @@ export class UpdateOutletController {
           newOutlet?.id_gimnasio
         );
         res.status(201).json({
+          success: true,
           data: responseData,
           messages: "Recurso modificado con exito",
         });
       } else {
-        return res.status(400).json({ error: newOutlet });
+        return res.status(400).json({ success: false, error: newOutlet });
       }
     } catch (error) {
       console.log(error);
       res.status(500).json({
+        success: false,
         error: error,
       });
     }

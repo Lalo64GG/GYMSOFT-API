@@ -40,7 +40,7 @@ export class OutletRepositoryMysql implements IOutletRepository {
       const savedOutlet = await this.outletRepository.save(newOutlet);
 
       if (!savedOutlet || !savedOutlet.id) {
-        return "Error: No se pudo guardar el outlet";
+        return "Error: No se pudo guardar el sucursal";
       }
 
       return new Outlet(
@@ -97,7 +97,7 @@ export class OutletRepositoryMysql implements IOutletRepository {
         relations: ["id_owner", "id_gimnasio"],
       });
 
-      if (!outlet) return "Error: Outlet no encontrado con el id proporcionado";
+      if (!outlet) return "Error: Sucursal no encontrado con el id proporcionado";
 
       return new Outlet(
         outlet.id!,
@@ -123,10 +123,10 @@ export class OutletRepositoryMysql implements IOutletRepository {
       const gimnasioRepository = this.dataSource.getRepository(EGimnasio);
 
       const outlet = await this.outletRepository.findOne({ where: { id } });
-      if (!outlet) return "Error: Outlet no encontrado";
+      if (!outlet) return "Error: sucursal no encontrado";
 
       const owner = await ownerRepository.findOne({ where: { id: id_owner } });
-      if (!owner) return "Error: Owner no encontrado con el id proporcionado";
+      if (!owner) return "Error: Encargado no encontrado con el id proporcionado";
 
       const gimnasio = await gimnasioRepository.findOne({
         where: { id: id_gimnasio },

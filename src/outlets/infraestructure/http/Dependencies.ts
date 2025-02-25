@@ -13,16 +13,26 @@ import { database } from "../../../db/Database";
 
 const dataSource = database.getDataSource();
 
-const outletRepositoryMysql =  new OutletRepositoryMysql(dataSource);
+const outletRepositoryMysql = new OutletRepositoryMysql(dataSource);
 
-const createOutletUseCase = new CreateOutletUseCase(outletRepositoryMysql)
-const deleteOutletUseCase = new DeleteOutletUseCase(outletRepositoryMysql)
-const getAllOutletsUseCase = new GetAllOutletsUseCase(outletRepositoryMysql)
-const getByIdOutletsUseCase = new GetByIdOutletsUseCase(outletRepositoryMysql)
-const updateOutletUseCase = new UpdateOutletUseCase(outletRepositoryMysql)
+const createOutletUseCase = new CreateOutletUseCase(outletRepositoryMysql);
+const deleteOutletUseCase = new DeleteOutletUseCase(outletRepositoryMysql);
+const getAllOutletsUseCase = new GetAllOutletsUseCase(outletRepositoryMysql);
+const getByIdOutletsUseCase = new GetByIdOutletsUseCase(outletRepositoryMysql);
+const updateOutletUseCase = new UpdateOutletUseCase(outletRepositoryMysql);
 
-export const createOutletController = new CreateOutletController(createOutletUseCase)
-export const deleteOutletController = new DeleteOutletController(deleteOutletUseCase)
-export const getAllOutletsController = new GetAllOutletsController(getAllOutletsUseCase)
-export const getByIdOutletController = new GetByIdOutletController(getByIdOutletsUseCase)
-export const updateOutletController = new UpdateOutletController(updateOutletUseCase)
+export const createOutletController = new CreateOutletController(
+  createOutletUseCase
+);
+export const deleteOutletController = new DeleteOutletController(
+  deleteOutletUseCase
+);
+export const getAllOutletsController = new GetAllOutletsController(
+  getAllOutletsUseCase
+);
+export const getByIdOutletController = new GetByIdOutletController(
+  getByIdOutletsUseCase
+);
+export const updateOutletController = new UpdateOutletController(
+  updateOutletUseCase
+);

@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
-import { DeleteOutletUseCase } from "../../../application/DeleteOutletUseCase";
+import { DeleteGimnasioUseCase } from "../../../application/DeleteGimnasioUseCase";
 
-export class DeleteOutletController {
-  constructor(readonly deleteUseCase: DeleteOutletUseCase) {}
+export class DeleteGimnasioController {
+  constructor(readonly deleteGimnasioUC: DeleteGimnasioUseCase) {}
   async run(req: Request, res: Response) {
     try {
       const id = req.params.id;
+      console.log(id);
+      
       const idNum = parseInt(id);
 
       if (isNaN(idNum)) {
@@ -16,23 +18,23 @@ export class DeleteOutletController {
         });
       }
 
-      const status = await this.deleteUseCase.run(idNum);
-      if (typeof status == "boolean" && status == true) {
+      const status = await this.deleteGimnasioUC.run(idNum);
+      if (status) {
         res.status(200).json({
           success: true,
           messages: "Recurso eliminado con exito",
         });
       } else {
-        res.status(404).json({
+        res.status(409).json({
           success: false,
-          error: status,
+          error: "No se encontro el recurso a eliminar",
         });
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        success: false,
+      return res.status(500).json({
+        succes: false,
         error: error,
+        messages: "Error en el servidor",
       });
     }
   }

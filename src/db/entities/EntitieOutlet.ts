@@ -5,6 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
   ManyToMany,
+  UpdateDateColumn,
 } from "typeorm";
 import { EGimnasio } from "./EntitieGimnasio";
 import { EUser } from "./EntitieUser";
@@ -38,6 +39,6 @@ export class EOutlet {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_at?: Date;
 
-  @Column({ type: "timestamp", nullable: true })
+  @UpdateDateColumn()
   updated_at?: Date;
 }

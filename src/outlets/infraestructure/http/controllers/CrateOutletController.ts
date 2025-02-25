@@ -22,17 +22,19 @@ export class CreateOutletController {
           id_gimnasio: newOutlet?.id_gimnasio,
         };
         res.status(201).json({
+          success: true,
           data: responseData,
           messages: "Recurso creado con exito",
         });
       } else {
-        return res.status(400).json({ error: newOutlet });
+        return res.status(400).json({ success: false, error: newOutlet });
       }
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            error:error
-        })
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        error: error,
+      });
     }
   }
 }
