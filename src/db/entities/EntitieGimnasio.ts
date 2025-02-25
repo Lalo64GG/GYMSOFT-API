@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { EOutlet } from "./EntitieOutlet";
 import { EOwner } from "./EntitieOwner";
 
@@ -8,7 +16,7 @@ export class EGimnasio {
   id?: number;
 
   @Column({ type: "varchar", length: 255 })
-  name?: string;
+  name?: String;
 
   @OneToMany(() => EOutlet, (outlet) => outlet.id_gimnasio)
   outlets?: EOutlet[];
@@ -20,6 +28,6 @@ export class EGimnasio {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_at?: Date;
 
-  @Column({ type: "timestamp", nullable: true })
+  @UpdateDateColumn()
   updated_at?: Date;
 }

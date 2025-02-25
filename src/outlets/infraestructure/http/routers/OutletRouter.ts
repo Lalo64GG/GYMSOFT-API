@@ -31,10 +31,16 @@ outletRouter.delete("/:id", (req, res) => {
     });
 });
 
-outletRouter.get(
-  "/",
-  getAllOutletsController.run.bind(getAllOutletsController)
-);
+outletRouter.get("/", (req, res) => {
+  getAllOutletsController
+    .run(req, res)
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      res.status(500).send({ error: err.message, msg: "Error en el servidor" });
+    });
+});
 
 outletRouter.get("/:id", (req, res) => {
   getByIdOutletController

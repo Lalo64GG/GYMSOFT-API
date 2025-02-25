@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import { GetByIdOutletsUseCase } from "../../../application/GetByIdOutletUseCase";
-import { Outlet } from "../../../domain/entities/Outlet";
+import { GetByIdGimnasioUseCase } from "../../../application/GetByIdGimnasioUseCase";
 
-export class GetByIdOutletController {
-  constructor(readonly getByIdUseCase: GetByIdOutletsUseCase) {}
-
+export class GetByIdGimnasioController {
+  constructor(readonly getByIdGimnasiosUC: GetByIdGimnasioUseCase) {}
   async run(req: Request, res: Response) {
     try {
       const id = req.params.id;
@@ -18,26 +16,26 @@ export class GetByIdOutletController {
         });
       }
 
-      const outlet = await this.getByIdUseCase.run(idNum);
-
-      if (outlet instanceof Outlet) {
+      const gimnasio = await this.getByIdGimnasiosUC.run(idNum);
+      if (gimnasio) {
         res.status(200).json({
           success: true,
-          messages: "Recurso encontrado",
-          data: outlet,
+          messages: "Recursos obtenidos con exito",
+          data: gimnasio,
         });
       } else {
         res.status(409).json({
           success: false,
-          messages: "No se encontro el recurso solicitado",
-          error: outlet,
+          error: "No se encontro ningun recurso con el id proporcionado",
         });
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        success: false,
+      console.error(error);
+      
+      return res.status(500).json({
+        succes: false,
         error: error,
+        messages: "Error en el servidor",
       });
     }
   }

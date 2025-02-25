@@ -1,8 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  UpdateDateColumn,
+} from "typeorm";
 import { EOutlet } from "./EntitieOutlet";
 
 @Entity("owners")
-
 export class EOwner {
   @PrimaryGeneratedColumn({ type: "bigint" })
   id?: number;
@@ -25,6 +30,6 @@ export class EOwner {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_at?: Date;
 
-  @Column({ type: "timestamp", nullable: true })
+  @UpdateDateColumn()
   updated_at?: Date;
 }
