@@ -24,6 +24,9 @@ export class EOwner {
   @Column({ type: "varchar", length: 255 })
   password?: string;
 
+  @Column({ type: "varchar", length: 100 })
+  rol?: string;
+
   @OneToMany(() => EOutlet, (outlet) => outlet.id_owner)
   outlets?: EOutlet[];
 

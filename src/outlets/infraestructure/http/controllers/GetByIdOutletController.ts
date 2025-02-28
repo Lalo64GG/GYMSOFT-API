@@ -27,7 +27,7 @@ export class GetByIdOutletController {
           data: outlet,
         });
       } else {
-        res.status(409).json({
+        res.status(404).json({
           success: false,
           messages: "No se encontro el recurso solicitado",
           error: outlet,
