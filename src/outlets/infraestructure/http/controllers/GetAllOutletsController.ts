@@ -9,7 +9,7 @@ export class GetAllOutletsController {
       const outlets = await this.getAllUseCase.run();
       if (typeof outlets != "string") {
         if (outlets.length == 0) {
-          res.status(409).json({
+          res.status(404).json({
             success: false,
             messages: "No hay datos registrados",
             data: outlets,
@@ -22,7 +22,7 @@ export class GetAllOutletsController {
           data: outlets,
         });
       } else {
-        response.status(404).json({
+        response.status(409).json({
           success: false,
           error: outlets,
         });

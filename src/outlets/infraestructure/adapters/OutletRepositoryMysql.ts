@@ -7,11 +7,15 @@ import { EGimnasio } from "../../../db/entities/EntitieGimnasio";
 
 export class OutletRepositoryMysql implements IOutletRepository {
   private readonly outletRepository: Repository<EOutlet>;
+  private readonly ownerRepository: Repository<EOwner>;
+  private readonly gimnasioRepository: Repository<EGimnasio>;
 
   constructor(private readonly dataSource: DataSource) {
     this.outletRepository = this.dataSource.getRepository(EOutlet);
+    this.ownerRepository = this.dataSource.getRepository(EOwner)
+    this.gimnasioRepository = this.dataSource.getRepository(EGimnasio);
   }
-  
+
   async create(
     name: string,
     address: string,
@@ -19,13 +23,11 @@ export class OutletRepositoryMysql implements IOutletRepository {
     id_gimnasio: number
   ): Promise<Outlet | string> {
     try {
-      const ownerRepository = this.dataSource.getRepository(EOwner);
-      const gimnasioRepository = this.dataSource.getRepository(EGimnasio);
+      const owner = await this.ownerRepository.findOne({ where: { id: id_owner } });
+      if (!owner)
+        return "Error: Encargado no encontrado con el id proporcionado";
 
-      const owner = await ownerRepository.findOne({ where: { id: id_owner } });
-      if (!owner) return "Error: Encargado no encontrado con el id proporcionado";
-
-      const gimnasio = await gimnasioRepository.findOne({
+      const gimnasio = await this.gimnasioRepository.findOne({
         where: { id: id_gimnasio },
       });
       if (!gimnasio) return "Error: Gym no encontrado con el id proporcionado";
@@ -73,7 +75,6 @@ export class OutletRepositoryMysql implements IOutletRepository {
       const outlets = await this.outletRepository.find({
         relations: ["id_owner", "id_gimnasio"],
       });
-
       return outlets.map(
         (outlet) =>
           new Outlet(
@@ -91,13 +92,13 @@ export class OutletRepositoryMysql implements IOutletRepository {
 
   async getById(id: number): Promise<Outlet | string> {
     try {
-      
       const outlet = await this.outletRepository.findOne({
         where: { id },
         relations: ["id_owner", "id_gimnasio"],
       });
 
-      if (!outlet) return "Error: Sucursal no encontrado con el id proporcionado";
+      if (!outlet)
+        return "Error: Sucursal no encontrado con el id proporcionado";
 
       return new Outlet(
         outlet.id!,
@@ -119,16 +120,15 @@ export class OutletRepositoryMysql implements IOutletRepository {
     id_gimnasio: number
   ): Promise<Outlet | string> {
     try {
-      const ownerRepository = this.dataSource.getRepository(EOwner);
-      const gimnasioRepository = this.dataSource.getRepository(EGimnasio);
 
       const outlet = await this.outletRepository.findOne({ where: { id } });
       if (!outlet) return "Error: sucursal no encontrado";
 
-      const owner = await ownerRepository.findOne({ where: { id: id_owner } });
-      if (!owner) return "Error: Encargado no encontrado con el id proporcionado";
+      const owner = await this.ownerRepository.findOne({ where: { id: id_owner } });
+      if (!owner)
+        return "Error: Encargado no encontrado con el id proporcionado";
 
-      const gimnasio = await gimnasioRepository.findOne({
+      const gimnasio = await this.gimnasioRepository.findOne({
         where: { id: id_gimnasio },
       });
       if (!gimnasio) return "Error: Gym no encontrado con el id proporcionado";

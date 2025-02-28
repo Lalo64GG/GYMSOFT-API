@@ -18,6 +18,9 @@ export class EGimnasio {
   @Column({ type: "varchar", length: 255 })
   name?: String;
 
+  @Column({ type: "varchar", length: 255 })
+  url_logo?: String;
+
   @OneToMany(() => EOutlet, (outlet) => outlet.id_gimnasio)
   outlets?: EOutlet[];
 
