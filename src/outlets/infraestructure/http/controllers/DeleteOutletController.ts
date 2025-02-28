@@ -22,7 +22,13 @@ export class DeleteOutletController {
           success: true,
           messages: "Recurso eliminado con exito",
         });
-      } else {
+      } else if (typeof status == "boolean" && status == true) {
+        res.status(404).json({
+          success: false,
+          messages:"No se encontro el recurso con el id proporcionado",
+          error: status,
+        });
+      }else{
         res.status(404).json({
           success: false,
           error: status,
