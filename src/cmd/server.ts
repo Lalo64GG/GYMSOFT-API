@@ -6,6 +6,7 @@ import cors from "cors";
 import { corsOptions } from "../config/cors";
 import { outletRouter } from "../outlets/infraestructure/http/routers/OutletRouter";
 import { gimnasioRouter } from "../gimnasio/infraestructure/http/routers/GimnasioRouter";
+import { planRouter } from "../plans/infrastructure/http/routers/PlanRouter";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/outlet", outletRouter);
+app.use("/plan", planRouter);
 app.use("/gimnasio", gimnasioRouter);
 
 app.get("/", (req, res) => {
