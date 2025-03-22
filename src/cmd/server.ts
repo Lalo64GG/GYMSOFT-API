@@ -8,6 +8,7 @@ import { outletRouter } from "../outlets/infraestructure/http/routers/OutletRout
 import { gimnasioRouter } from "../gimnasio/infraestructure/http/routers/GimnasioRouter";
 import { routerUpload } from "../shared/FilesUpload/infraestructure/http/routers/RouterUploads";
 import { planRouter } from "../plans/infrastructure/http/routers/PlanRouter";
+import { ownerRouter } from "../owner/infrastructure/http/routers/OwnerRouter";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/owner", ownerRouter);
 app.use("/outlet", outletRouter);
 app.use("/plan", planRouter);
 app.use("/gimnasio", gimnasioRouter);
