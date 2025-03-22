@@ -28,7 +28,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
       const newPlan = this.planRepository.create({
         name,
         cost,
-        date,
+        date_duration:date,
         id_gimnasio: gimnasio,
       });
 
@@ -42,7 +42,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
         savedPlan.id!,
         savedPlan.name!,
         savedPlan.cost!,
-        savedPlan.date!.toString(),
+        savedPlan.date_duration!,
         id_gimnasio
       );
     } catch (error) {
@@ -74,7 +74,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
             plan.id!,
             plan.name!,
             plan.cost!,
-            plan.date!.toString(),
+            plan.date_duration!,
             plan.id_gimnasio?.id!
           )
       );
@@ -97,7 +97,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
         plan.id!,
         plan.name!,
         plan.cost!,
-        plan.date!.toString(),
+        plan.date_duration!,
         plan.id_gimnasio?.id!
       );
     } catch (error) {
@@ -124,7 +124,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
 
       plan.name = name;
       plan.cost = cost;
-      plan.date = new Date(date)
+      plan.date_duration = date;
       plan.id_gimnasio = gimnasio;
 
       const updatedPlan = await this.planRepository.save(plan);
@@ -133,7 +133,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
         updatedPlan.id!,
         updatedPlan.name!,
         updatedPlan.cost!,
-        updatedPlan.date!.toString(),
+        updatedPlan.date_duration!,
         updatedPlan.id_gimnasio?.id!
       );
     } catch (error) {

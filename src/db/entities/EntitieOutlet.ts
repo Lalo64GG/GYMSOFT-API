@@ -3,8 +3,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  OneToMany,
   JoinColumn,
-  ManyToMany,
   UpdateDateColumn,
 } from "typeorm";
 import { EGimnasio } from "./EntitieGimnasio";
@@ -34,7 +34,10 @@ export class EOutlet {
   @JoinColumn({ name: "id_gimnasio" })
   id_gimnasio?: EGimnasio;
 
-  //@ManyToMany(() => EUser, (user) => )
+  @OneToMany(() => EUser, (user) => user.outlet, {
+    onDelete: "CASCADE",
+  })
+  users?: EUser[]; 
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_at?: Date;

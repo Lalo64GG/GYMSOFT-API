@@ -10,6 +10,7 @@ import {
 import { EOutlet } from "./EntitieOutlet";
 import { EOwner } from "./EntitieOwner";
 import { EPlan } from "./EntitiePlan";
+import { ERoutine } from "./EntitieRoutine";
 
 @Entity("gimnasio")
 export class EGimnasio {
@@ -27,6 +28,9 @@ export class EGimnasio {
 
   @OneToMany(() => EPlan, (plan) => plan.id_gimnasio)
   plans?: EPlan[];
+
+  @OneToMany(() => ERoutine, (routine) => routine.gimnasio)
+  routines?: ERoutine[];
 
   @OneToOne(() => EOwner, { nullable: true })
   @JoinColumn({ name: "id_owner" })
