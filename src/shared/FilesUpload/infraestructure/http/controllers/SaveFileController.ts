@@ -26,11 +26,11 @@ export class SaveFileController {
         .substring(fileInfo.path.indexOf("uploads"))
         .replace(/\\/g, "/");
       res.locals.URL = relativePath;
-      res.status(201).json({
+      /*res.status(201).json({
         status:"success",
         data: fileInfo
-      })
-      //next();
+      })*/
+      next();
     } catch (error) {
       console.error("Error en la subida:", error);
       return res.status(500).json({ error: "Error al procesar el archivo" });
