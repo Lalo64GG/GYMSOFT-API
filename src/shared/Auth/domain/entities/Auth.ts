@@ -1,9 +1,10 @@
 export class Auth {
   constructor(
+    readonly payload: Payload,
     readonly pyload: Pyload,
     readonly secret: string,
     readonly options: JSON
-  ) {}
+  ) { }
 }
 
 class Pyload {
@@ -13,4 +14,12 @@ class Pyload {
     readonly rol: string,
     readonly id_gimnasio: number
   ) {}
+}
+
+class Payload {
+  constructor(
+    readonly id: number,
+    readonly email: string,
+    readonly rol: string,
+  ) { }
 }

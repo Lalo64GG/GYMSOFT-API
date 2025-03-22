@@ -14,7 +14,7 @@ export class AuthServices implements IAuthRepository {
     this.userRepository = this.dataSource.getRepository(EUser);
   }
 
-  async createToken(payload: Auth["pyload"]): Promise<string> {
+  async createToken(payload: Auth["payload"]): Promise<string> {
     try {
       const secret = process.env.SECRET_KEY_TOKEN;
 
@@ -24,7 +24,7 @@ export class AuthServices implements IAuthRepository {
         );
       }
 
-      return sign({ pyload: payload }, secret, { expiresIn: "1h" });
+      return sign({ payload: payload }, secret, { expiresIn: "1h" });
     } catch (error) {
       console.error("Error al crear el token:", error);
       throw new Error("No se pudo generar el token.");
@@ -46,14 +46,14 @@ export class AuthServices implements IAuthRepository {
         console.log(access);
         
         let repo: Repository<EUser | EOwner>;
-        if (access.pyload.rol === "admin") {
+        if (access.payload.rol === "admin") {
           repo = this.ownerRepository;
         } else {
           repo = this.userRepository;
         }
 
         const exist = await repo.findOne({
-          where: { id: access.pyload.id },
+          where: { id: access.payload.id },
         });
 
         return exist ? true : false;

@@ -42,7 +42,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
         savedPlan.id!,
         savedPlan.name!,
         savedPlan.cost!,
-        savedPlan.date!.toISOString(),
+        savedPlan.date!.toString(),
         id_gimnasio
       );
     } catch (error) {
@@ -74,7 +74,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
             plan.id!,
             plan.name!,
             plan.cost!,
-            plan.date!.toISOString(),
+            plan.date!.toString(),
             plan.id_gimnasio?.id!
           )
       );
@@ -97,7 +97,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
         plan.id!,
         plan.name!,
         plan.cost!,
-        plan.date!.toISOString(),
+        plan.date!.toString(),
         plan.id_gimnasio?.id!
       );
     } catch (error) {
@@ -133,7 +133,7 @@ export class PlanRepositoryMysql implements IPlanRepository {
         updatedPlan.id!,
         updatedPlan.name!,
         updatedPlan.cost!,
-        updatedPlan.date!.toISOString(),
+        updatedPlan.date!.toString(),
         updatedPlan.id_gimnasio?.id!
       );
     } catch (error) {
