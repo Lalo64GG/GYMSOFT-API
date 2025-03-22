@@ -6,11 +6,12 @@ export class CreateTokenControll {
   constructor(readonly createToken: CreateTokenUseCase) {}
   async run(req: Request, res: Response) {
     try {
-      const pyload: Auth["pyload"] = {
+      const pyload: Auth["payload"] = {
         id: parseInt(res.locals.user.id),
-        id_outlet: parseInt(res.locals.user.id_outlet),
+        //id_outlet: parseInt(res.locals.user.id_outlet),
         rol: res.locals.user.rol,
-        id_gimnasio: parseInt(res.locals.user.id_gimnasio),
+        //id_gimnasio: parseInt(res.locals.user.id_gimnasio),
+        email: res.locals.user.email
       };
 
       const token = await this.createToken.run(pyload);
